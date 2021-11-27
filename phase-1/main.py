@@ -146,7 +146,7 @@ else:
     for i in range(len(main_text)):
         print('***')
         print('------')
-        print(main_text[4])
+        print(main_text[i])
         print('------')
         print(df.iloc[[result[i] - 1]]['title'].values[0])
         print('***')
