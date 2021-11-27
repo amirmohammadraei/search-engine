@@ -3,7 +3,7 @@ from hazm import *
 import pandas as pd
 
 
-porseman = 'دانشگاه امیرکبیر'
+porseman = 'واکسن آسترازنکا'
 
 
 normalizer = Normalizer()
@@ -92,7 +92,7 @@ if len(main_porseman) == 1:
                 print('------')
                 print(j)
                 print('------')
-        print(df.iloc[[int(i) - 1]]['url'].values[0])
+        print(df.iloc[[int(i) - 1]]['title'].values[0])
         print('****')
         print('\n\n')
 else:
@@ -107,7 +107,8 @@ else:
     
     result = []
     main_text = []
-    while not result and len(common_pages) > 1:
+    flag_len2 = False
+    while  len(result) == 0 and len(common_pages) > 1:
         for i in common_pages:
             sus_page = df.iloc[[int(i) - 1]]['content'].values[0]
             final_text = []
@@ -123,31 +124,50 @@ else:
                                 final_text.append(iterate[0])
                         else:
                                 final_text.append(iterate[0])
-                index_result = []
-                for z in main_porseman:
-                    try:
-                        index_result.append(final_text.index(z))
-                        flag = True
-                    except:
-                        flag = False
-                        break
-                if i not in result and len(index_result) > 1 and flag:
-                    flag_sample = True
-                    for index, value in enumerate(index_result):
-                        if index != 0:
-                            if value - index_result[index - 1] != 1:
-                                flag_sample = False
-                                break
-                    if flag_sample:
-                        result.append(i)
-                        main_text.append(confli)
-        del main_porseman[-1]      
+
+                if len(main_porseman) == 2:
+                    list1 = []
+                    list2 = []
+                    for indextt, tt in enumerate(final_text):
+                        if tt == main_porseman[0]:
+                            try:
+                                if final_text[indextt + 1] == main_porseman[1]:
+                                    if i not in result:
+                                        result.append(i)
+                                        print((df.iloc[[i - 1]]['title'].values[0]))
+                                    # print(confli)
+                                    main_text.append(confli)
+                                    flag_len2 = True
+                            except:
+                                pass
+                else:
+                    index_result = []
+                    for z in main_porseman:
+                        try:
+                            index_result.append(final_text.index(z))
+                            flag = True
+                        except:
+                            flag = False
+                            break
+                    if i not in result and len(index_result) > 1 and flag:
+                        flag_sample = True
+                        for index, value in enumerate(index_result):
+                            if index != 0:
+                                if value - index_result[index - 1] != 1:
+                                    flag_sample = False
+                                    break
+                        if flag_sample:
+                            result.append(i)
+                            main_text.append(confli)
+        if len(result) == 0:
+            del main_porseman[-1]      
     
-    for i in range(len(main_text)):
-        print('***')
-        print('------')
-        print(main_text[i])
-        print('------')
-        print(df.iloc[[result[i] - 1]]['title'].values[0])
-        print('***')
-        print('\n\n')
+    if flag_len2 is False:
+        for i in range(len(main_text)):
+            print('***')
+            print('------')
+            print(main_text[i])
+            print('------')
+            print(df.iloc[[result[i] - 1]]['title'].values[0])
+            print('***')
+            print('\n\n')
