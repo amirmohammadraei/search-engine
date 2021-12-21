@@ -1,6 +1,5 @@
 import pandas as pd
 from hazm import *
-import pandas as pd
 from collections import Counter
 from collections import OrderedDict
 import math
