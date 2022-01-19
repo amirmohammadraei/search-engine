@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 .DS_Store
 .vscode
+phase-3/IR00_dataset_ph3/IR00_3_11k News.xlsx
+phase-3/IR00_dataset_ph3/IR00_3_17k News.xlsx
+phase-3/IR00_dataset_ph3/IR00_3_20k News.xlsx
