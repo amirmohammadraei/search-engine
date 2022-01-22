@@ -53,7 +53,7 @@ def get_sentence_from_dict(content, word):
 
 def calculate_tfidf(dictionary):
     for iterate in dictionary:
-        new_value = (1 + math.log(dictionary[iterate])) * math.log(len(df) / len(word_in_doc[iterate]))
+        new_value = (1 + math.log10(dictionary[iterate])) * math.log10(len(df) / len(word_in_doc[iterate]))
         if new_value == 0:
             del dictionary[iterate]
         else:
