@@ -10,7 +10,7 @@ records_per_page = 10
 
 normalizer = Normalizer()
 lemmatizer = Lemmatizer()
-tagger = POSTagger(model='phase-1/resources/postagger.model')
+tagger = POSTagger(model='/Users/amiroo/Desktop/search-engine/phase-1/resources/postagger.model')
 
 list_of_stop_words = stopwords_list()
 word_in_doc, docs_tfidf, result_doc, title_sentences = {}, {}, {}, {}
@@ -75,7 +75,7 @@ def print_result(list_of_sorted_news, title_sentences):
 
 if __name__ == '__main__':
 
-    df = pd.read_excel('phase-1/IR1_7k_news.xlsx')
+    df = pd.read_excel('/Users/amiroo/Desktop/search-engine/phase-1/IR1_7k_news.xlsx')
 
     word_doc(df)
 
@@ -102,4 +102,5 @@ if __name__ == '__main__':
             title_sentences.update({i: {'title': title, 'sentences': dict.fromkeys(all_sentences).keys()}})
     sorted_docs = OrderedDict(sorted(result_doc.items(), key=lambda x: x[1]))
 
+    print(list(sorted_docs))
     print_result(list(sorted_docs), title_sentences)
